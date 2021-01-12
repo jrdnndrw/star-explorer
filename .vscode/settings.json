@@ -1,5 +1,6 @@
 {
     "Lua.diagnostics.globals": [
-        "graphics"
+        "graphics",
+        "display"
     ]
 }
