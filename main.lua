@@ -84,3 +84,8 @@ scoreText = display.newText(uiGroup, "Score: " .. score, 400, 80, native.systemF
 
 -- Hide the status bar
 display.setStatusBar(display.HiddenStatusBar)
+
+local function updateText()
+    livesText.text = "Lives: " .. lives
+    scoreText.text = "Score: "  .. score
+end
