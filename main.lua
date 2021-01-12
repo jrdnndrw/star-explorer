@@ -81,3 +81,6 @@ ship.myName = "ship" -- will help determine collisions
 -- Display lives and scores
 livesText = display.newText(uiGroup, "Lives: " .. lives, 200, 80, native.systemFont, 36)
 scoreText = display.newText(uiGroup, "Score: " .. score, 400, 80, native.systemFont, 36)
+
+-- Hide the status bar
+display.setStatusBar(display.HiddenStatusBar)
