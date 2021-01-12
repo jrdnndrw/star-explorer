@@ -55,6 +55,7 @@ local died = false
 
 local astroidsTable = {}
 
+local background
 local ship
 local gameLoopTimer
 local livesText
@@ -65,7 +66,14 @@ local backGroup = display.newGroup() -- for the background image
 local mainGroup = display.newGroup() -- for the ship, astroid, lasers, etc
 local uiGroup = display.newGroup() -- for the ui objects like score and lives
 
--- Load background
-local background = display.newImageRect(backGroup,"background.png",800,1400)
+-- Load the background
+background = display.newImageRect(backGroup,"background.png",800,1400)
 background.x = display.contentCenterX
 background.y = display.contentCenterY
+
+-- Load the ship
+ship = display.newImageRect(mainGroup,objectSheet,4,98,79)
+ship.x = display.contentCenterX
+ship.y = display.contentHeight - 100
+physics.addBody(ship,{radius=30,isSensor=true})
+ship.myName = "ship" -- will help determine collisions
