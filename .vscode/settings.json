@@ -1,6 +1,7 @@
 {
     "Lua.diagnostics.globals": [
         "graphics",
-        "display"
+        "display",
+        "native"
     ]
 }
