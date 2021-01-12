@@ -4,6 +4,10 @@
 --
 -----------------------------------------------------------------------------------------
 
+-- Hide the status bar
+display.setStatusBar(display.HiddenStatusBar)
+
+-- Start the physics
 local physics = require("physics")
 physics.start()
 physics.setGravity(0,0)
@@ -53,7 +57,7 @@ local lives = 3
 local score = 0
 local died = false
 
-local astroidsTable = {}
+local asteroidsTable = {}
 
 local background
 local ship
@@ -82,10 +86,23 @@ ship.myName = "ship" -- will help determine collisions
 livesText = display.newText(uiGroup, "Lives: " .. lives, 200, 80, native.systemFont, 36)
 scoreText = display.newText(uiGroup, "Score: " .. score, 400, 80, native.systemFont, 36)
 
--- Hide the status bar
-display.setStatusBar(display.HiddenStatusBar)
-
+-- Upates the lives and scores
 local function updateText()
     livesText.text = "Lives: " .. lives
     scoreText.text = "Score: "  .. score
+end
+
+-- Create an asteroid
+local function createAsteroid()
+    local newAsteroid = display.newImageRect(mainGroup, objectSheet, 1, 102, 85)
+    table.insert(asteroidsTable, newAsteroid)
+    physics.addBody(newAsteroid, "dynamic", { radius=40, bounce=0.8})
+    newAsteroid.myName = "asteroid"
+
+    local whereFrom = math.random(3)
+    if (whereFrom == 1) then
+        -- 1 is from the left
+        newAsteroid.x = -60
+        newAsteroid.y = math.random(500)
+    end
 end
