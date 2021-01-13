@@ -105,5 +105,10 @@ local function createAsteroid()
         newAsteroid.x = -60 -- create outside the screan
         newAsteroid.y = math.random(500) -- randomly generate between top (1) and center (500) of the screen
         newAsteroid:setLinearVelocity(math.random(40, 120), math.random(20, 60)) -- random direction and velocity
+    elseif (whereFrom == 2) then
+        -- 2 is from the top
+        newAsteroid.x = math.random(display.contentWidth)
+        newAsteroid.y = -60
+        newAsteroid:setLinearVelocity(math.random(-40, 40), math.random(40, 120))
     end
 end
