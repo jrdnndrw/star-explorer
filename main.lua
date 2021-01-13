@@ -110,5 +110,10 @@ local function createAsteroid()
         newAsteroid.x = math.random(display.contentWidth)
         newAsteroid.y = -60
         newAsteroid:setLinearVelocity(math.random(-40, 40), math.random(40, 120))
+    elseif (whereFrom == 3) then
+        -- 3 is from the right
+        newAsteroid.x = display.contentWidth + 60
+        newAsteroid.y = math.random(500)
+        newAsteroid:setLinearVelocity(math.random(-120, -40), math.random(20, 60))
     end
 end
