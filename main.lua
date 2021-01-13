@@ -131,3 +131,5 @@ local function fireLaser()
         onComplete = function() display.remove(newLaser) end
     })
 end
+
+ship:addEventListener("tap", fireLaser)
