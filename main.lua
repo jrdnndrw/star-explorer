@@ -79,7 +79,7 @@ background.y = display.contentCenterY
 ship = display.newImageRect(mainGroup, objectSheet, 4, 98, 79)
 ship.x = display.contentCenterX
 ship.y = display.contentHeight - 100
-physics.addBody(ship, { radius=30, isSensor=true })
+physics.addBody(ship, { radius = 30, isSensor = true })
 ship.myName = "ship" -- will help determine collisions
 
 -- Display lives and scores
@@ -96,7 +96,7 @@ end
 local function createAsteroid()
     local newAsteroid = display.newImageRect(mainGroup, objectSheet, 1, 102, 85)
     table.insert(asteroidsTable, newAsteroid)
-    physics.addBody(newAsteroid, "dynamic", { radius=40, bounce=0.8})
+    physics.addBody(newAsteroid, "dynamic", { radius = 40, bounce = 0.8})
     newAsteroid.myName = "asteroid"
 
     local whereFrom = math.random(3)
@@ -121,10 +121,13 @@ end
 
 local function fireLaser()
     local newLaser = display.newImageRect(mainGroup, objectSheet, 5, 14, 40)
-    physics.addBody(newLaser, "dynamic", { isSensor=true })
+    physics.addBody(newLaser, "dynamic", { isSensor = true })
     newLaser.isBullet = true
     newLaser.myName = "laser"
     newLaser.x = ship.x
     newLaser.y = ship.y
     newLaser:toBack()
+    transition.to(newLaser, { y = -40, time = 500,
+        onComplete = function() display.remove(newLaser) end
+    })
 end
