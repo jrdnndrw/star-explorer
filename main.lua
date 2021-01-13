@@ -124,4 +124,7 @@ local function fireLaser()
     physics.addBody(newLaser, "dynamic", { isSensor=true })
     newLaser.isBullet = true
     newLaser.myName = "laser"
+    newLaser.x = ship.x
+    newLaser.y = ship.y
+    newLaser:toBack()
 end
