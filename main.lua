@@ -157,3 +157,8 @@ local function dragShip(event)
 end
 
 ship:addEventListener("touch", dragShip)
+
+local function gameLoop()
+    -- Create new asteroid
+    createAsteroid()
+end
