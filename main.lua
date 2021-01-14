@@ -161,4 +161,20 @@ ship:addEventListener("touch", dragShip)
 local function gameLoop()
     -- Create new asteroid
     createAsteroid()
+    -- Remove asteroids that have drifted off screen
+    -- Starts at asteroidsTable, stops at 1 and decrements 1
+    for i = #asteroidsTable, 1, -1 do
+        local thisAsteroid = asteroidsTable[i]
+        if (
+            thisAsteroid.x < -100 or
+            thisAsteroid.x > display.contentWidth + 100 or
+            thisAsteroid.y < -100 or
+            thisAsteroid.y > display.contentHeight + 100
+        ) then
+            -- Removes the asteroid from display
+            display.remove(thisAsteroid)
+            -- Removes the asteroid from memory
+            table.remove(asteroidsTable, i)
+        end
+    end
 end
