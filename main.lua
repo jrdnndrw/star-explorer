@@ -54,7 +54,9 @@ local objectSheet = graphics.newImageSheet("gameObjects.png", sheetOptions)
 
 -- Initialized variables
 local lives = 3
+local stringLives = "Lives: "
 local score = 0
+local stringScore = "Score: "
 local died = false
 
 local asteroidsTable = {}
@@ -83,8 +85,8 @@ physics.addBody(ship, { radius = 30, isSensor = true })
 ship.myName = "ship" -- will help determine collisions
 
 -- Display lives and scores
-livesText = display.newText(uiGroup, "Lives: " .. lives, 200, 80, native.systemFont, 36)
-scoreText = display.newText(uiGroup, "Score: " .. score, 400, 80, native.systemFont, 36)
+livesText = display.newText(uiGroup, stringScore .. lives, 200, 80, native.systemFont, 36)
+scoreText = display.newText(uiGroup, stringLives .. score, 400, 80, native.systemFont, 36)
 
 -- Upates the lives and scores
 local function updateText()
@@ -215,7 +217,24 @@ local function onCollision(event)
             end
             -- Increase the score
             score = score + 100
-            scoreText.text = "Score: " .. score
+            scoreText.text = stringScore .. score
+        elseif (
+            (obj1.myName == "ship" and obj2.myName == "asteroid") or
+            (obj1.myName == "asteroid" and obj2.myName == "ship")
+        ) then
+            if(died == false)then
+                died = true
+                -- Update the lives
+                lives = lives - 1
+                livesText = stringLives .. lives
+                if(lives == 0)then
+                    -- Game over!
+                    display.remove(ship)
+                else
+                    ship.alpha = 0
+                    timer.performWithDelay(1000, restoreShip)
+                end
+            end
         end
     end
 end
