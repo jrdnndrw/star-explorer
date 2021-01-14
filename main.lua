@@ -137,19 +137,19 @@ ship:addEventListener("tap", fireLaser)
 local function dragShip(event)
     local ship = event.target
     local phase = event.phase
-    if ("began" == phase) then
+    if (phase == "began") then
         -- Set touch focus on the ship
         display.currentStage:setFocus(ship)
         -- Store initial offset position
         ship.touchOffSetX = event.x - ship.x
         -- Store the ship on the y axis
         -- ship.touchOffSetY = event.y - ship.y
-    elseif ("moved" == phase) then
+    elseif (phase == "moved") then
         -- Move the ship to the new touch position
         ship.x = event.x - ship.touchOffSetX
         -- Moving the ship on the y axis
         -- ship.y = event.y - ship.touchOffSetY
-    elseif ("ended" == phase or "cancelled" ==  phase) then
+    elseif (phase == "ended" or phase == "cancelled") then
         -- Release touch focus on ship
         display.currentStage:setFocus(nil)
     end
@@ -194,4 +194,19 @@ local function restoreShip()
             died = false
         end
     })
+end
+
+local function onCollision(event)
+    if (event.phase == "began") then
+        local obj1 = event.object1
+        local obj2 = event.object2
+        if (
+            (obj1.myName == "laser" and obj2.myName == "asteroid") or
+            (obj1.myName == "asteroid" and obj2.myName == "laser")
+        ) then
+            -- Remove both laser and asteroid
+            display.remove(obj1)
+            display.remove(obj2)
+        end
+    end
 end
