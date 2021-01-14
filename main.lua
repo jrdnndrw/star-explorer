@@ -178,3 +178,5 @@ local function gameLoop()
         end
     end
 end
+
+gameLoopTimer = timer.performWithDelay(1000, gameLoop, 0)

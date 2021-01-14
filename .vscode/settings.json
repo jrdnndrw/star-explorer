@@ -3,6 +3,7 @@
         "graphics",
         "display",
         "native",
-        "transition"
+        "transition",
+        "timer"
     ]
 }
