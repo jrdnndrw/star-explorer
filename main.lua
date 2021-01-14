@@ -207,6 +207,12 @@ local function onCollision(event)
             -- Remove both laser and asteroid
             display.remove(obj1)
             display.remove(obj2)
+            for i = #asteroidsTable, 1, -1 do
+                if (asteroidsTable[i] == obj1 or asteroidsTable[i] == obj2) then
+                    table.remove(asteroidsTable, i)
+                    break
+                end
+            end
         end
     end
 end
