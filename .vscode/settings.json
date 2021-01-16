@@ -4,6 +4,7 @@
         "display",
         "native",
         "transition",
-        "timer"
+        "timer",
+        "Runtime"
     ]
 }

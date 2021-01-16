@@ -85,13 +85,13 @@ physics.addBody(ship, { radius = 30, isSensor = true })
 ship.myName = "ship" -- will help determine collisions
 
 -- Display lives and scores
-livesText = display.newText(uiGroup, stringScore .. lives, 200, 80, native.systemFont, 36)
-scoreText = display.newText(uiGroup, stringLives .. score, 400, 80, native.systemFont, 36)
+livesText = display.newText(uiGroup, stringLives .. lives, 200, 80, native.systemFont, 36)
+scoreText = display.newText(uiGroup, stringScore .. score, 400, 80, native.systemFont, 36)
 
 -- Upates the lives and scores
 local function updateText()
-    livesText.text = "Lives: " .. lives
-    scoreText.text = "Score: "  .. score
+    livesText.text = stringLives .. lives
+    scoreText.text = stringScore  .. score
 end
 
 -- Create an asteroid
@@ -181,6 +181,7 @@ local function gameLoop()
     end
 end
 
+-- Variable allows to add pausing to the game
 gameLoopTimer = timer.performWithDelay(1000, gameLoop, 0)
 
 local function restoreShip()
@@ -217,7 +218,7 @@ local function onCollision(event)
             end
             -- Increase the score
             score = score + 100
-            scoreText.text = stringScore .. score
+            updateText()
         elseif (
             (obj1.myName == "ship" and obj2.myName == "asteroid") or
             (obj1.myName == "asteroid" and obj2.myName == "ship")
@@ -226,7 +227,8 @@ local function onCollision(event)
                 died = true
                 -- Update the lives
                 lives = lives - 1
-                livesText = stringLives .. lives
+                updateText()
+                -- livesText.text = stringLives .. lives
                 if(lives == 0)then
                     -- Game over!
                     display.remove(ship)
@@ -238,3 +240,5 @@ local function onCollision(event)
         end
     end
 end
+
+Runtime:addEventListener("collision", onCollision)
