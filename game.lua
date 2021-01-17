@@ -179,6 +179,11 @@ local function restoreShip()
     })
 end
 
+-- Ends the game
+local function endGame()
+	composer.gotoScene("menu", { time = 800, effect = "crossfade" })
+end
+
 -- Collision handling
 local function onCollision(event)
     if (event.phase == "began") then
@@ -212,7 +217,8 @@ local function onCollision(event)
                 -- livesText.text = stringLives .. lives
                 if(lives == 0)then
                     -- Game over!
-                    display.remove(ship)
+					display.remove(ship)
+					timer.performWithDelay(2000, endGame)
                 else
                     ship.alpha = 0
                     timer.performWithDelay(1000, restoreShip)
