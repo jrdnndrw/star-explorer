@@ -62,7 +62,6 @@ local died = false
 
 local asteroidsTable = {}
 
-local background
 local ship
 local gameLoopTimer
 local livesText
@@ -230,9 +229,38 @@ end
 -- create()
 function scene:create( event )
 
-	local sceneGroup = self.view
 	-- Code here runs when the scene is first created but has not yet appeared on screen
+	local sceneGroup = self.view
 
+	physics.pause() -- Temporarily pause the physics
+
+	-- Set up display groups, order is important
+	backGroup = display.newGroup() -- For the background image
+	sceneGroup:insert(backGroup) -- Insert into the views scene group
+	mainGroup = display.newGroup() -- For the ship, astroid, lasers, etc
+	sceneGroup:insert(mainGroup) -- Insert into the views scene group
+	uiGroup = display.newGroup() -- For the ui objects like score and lives
+	sceneGroup:insert(uiGroup) -- Insert into the views scene group
+
+	-- Load the background
+	local background = display.newImageRect(backGroup, "background.png", 800, 1400)
+	background.x = display.contentCenterX
+	background.y = display.contentCenterY
+
+	-- Load the ship
+	ship = display.newImageRect(mainGroup, objectSheet, 4, 98, 79)
+	ship.x = display.contentCenterX
+	ship.y = display.contentHeight - 100
+	physics.addBody(ship, { radius = 30, isSensor = true })
+	ship.myName = "ship" -- will help determine collisions
+
+	-- Display lives and scores
+	livesText = display.newText(uiGroup, stringLives .. lives, 200, 80, native.systemFont, 36)
+	scoreText = display.newText(uiGroup, stringScore .. score, 400, 80, native.systemFont, 36)
+
+	-- Ships movement controls
+	ship:addEventListener("tap", fireLaser)
+	ship:addEventListener("touch", dragShip)
 end
 
 
