@@ -275,7 +275,10 @@ function scene:show( event )
 
 	elseif ( phase == "did" ) then
 		-- Code here runs when the scene is entirely on screen
-
+		physics.start()
+		Runtime:addEventListener("collision", onCollision)
+		-- Variable allows to add pausing to the game
+		gameLoopTimer = timer.performWithDelay(1000, gameLoop, 0)
 	end
 end
 
