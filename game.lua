@@ -181,7 +181,7 @@ end
 
 -- Ends the game
 local function endGame()
-	composer.gotoScene("menu", { time = 800, effect = "crossfade" })
+	composer.gotoScene("menu", { time = 800, effect = "crossFade" })
 end
 
 -- Collision handling
@@ -300,8 +300,9 @@ function scene:hide( event )
 		timer.cancel(gameLoopTimer)
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
-		Runtime.removeEventListener("collisions", onCollision)
+		Runtime:removeEventListener("collision", onCollision )
 		physics.pause()
+		composer.removeScene("game")
 	end
 end
 
