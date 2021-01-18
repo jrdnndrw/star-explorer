@@ -1,6 +1,4 @@
-
 local composer = require( "composer" )
-
 local scene = composer.newScene()
 
 -- -----------------------------------------------------------------------------------
@@ -10,9 +8,7 @@ local scene = composer.newScene()
 
 -- Initialize variables
 local json = require("json")
-
 local scoreTable = {}
-
 local filePath = system.pathForFile("scores.json", system.DocumentsDirectory)
 
 local function loadScores()
@@ -47,11 +43,14 @@ end
 -- -----------------------------------------------------------------------------------
 
 -- create()
-function scene:create( event )
-
-	local sceneGroup = self.view
+function scene:create(event)
 	-- Code here runs when the scene is first created but has not yet appeared on screen
-
+	local sceneGroup = self.view
+	-- Load the previous scores
+	loadScores()
+	-- Insert the saved score from last game, then reset it
+	table.insert(scoreTable, composer.getVariable("finalScore"))
+	composer.setVariable("finalScore", 0)
 end
 
 
