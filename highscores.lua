@@ -15,6 +15,18 @@ local scoreTable = {}
 
 local filePath = system.pathForFile("scores.json", system.DocumentsDirectory)
 
+local function loadScores()
+	local file = io.open(filePath, "r")
+	if file then
+		local contents = file:read("*a")
+		io.close(file)
+		scoreTable = json.decode(contents)
+	end
+	if (scoreTable ==  nil or #scoreTable == 0) then
+		scoreTable = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+	end
+end
+
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
