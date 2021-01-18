@@ -17,13 +17,28 @@ local filePath = system.pathForFile("scores.json", system.DocumentsDirectory)
 
 local function loadScores()
 	local file = io.open(filePath, "r")
+
 	if file then
 		local contents = file:read("*a")
 		io.close(file)
 		scoreTable = json.decode(contents)
 	end
+
 	if (scoreTable ==  nil or #scoreTable == 0) then
 		scoreTable = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+	end
+end
+
+local function saveScores()
+	for i = #scoreTable, 11, -1 do
+		table.remove(scoreTable, i)
+	end
+
+	local file = io.open(filePath, "w")
+
+	if file then
+		file:write(json.encode(scoreTable))
+		io.close(file)
 	end
 end
 
