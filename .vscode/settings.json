@@ -6,6 +6,7 @@
         "transition",
         "timer",
         "Runtime",
-        "system"
+        "system",
+        "audio"
     ]
 }
