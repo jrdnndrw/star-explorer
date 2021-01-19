@@ -58,6 +58,21 @@ function scene:create(event)
 	table.sort(scoreTable, compare)
 	-- Saves the score
 	saveScores()
+	-- Load the background
+	local background = display.newImageRect(sceneGroup, "background.png", 800, 1400)
+	background.x = display.contentCenterX
+	background.y = display.contentCenterY
+	local highScoresHeader = display.newText(sceneGroup, "High Scores", display.contentCenterX, 100, native.systemFont, 44)
+	for i = 1, 10 do
+		if (scoreTable[i]) then
+			local yPos = 150 +(i * 56)
+			local rankNum = display.newText(sceneGroup, i..")", display.contentCenterX-50, yPos, native.systemFont, 36)
+			rankNum:setFillColor(0.8)
+			rankNum.anchorX = 1
+			local thisScore = display.newText(sceneGroup, scoreTable[i], display.contentCenterX-30, yPos, native.systemFont, 36)
+			thisScore.anchorX = 0
+		end
+	end
 end
 
 
