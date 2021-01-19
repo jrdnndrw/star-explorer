@@ -51,6 +51,13 @@ function scene:create(event)
 	-- Insert the saved score from last game, then reset it
 	table.insert(scoreTable, composer.getVariable("finalScore"))
 	composer.setVariable("finalScore", 0)
+	-- Sort the scores from high to low
+	local function compare(a, b)
+		return a > b
+	end
+	table.sort(scoreTable, compare)
+	-- Saves the score
+	saveScores()
 end
 
 
