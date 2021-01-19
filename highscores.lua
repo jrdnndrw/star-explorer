@@ -38,6 +38,10 @@ local function saveScores()
 	end
 end
 
+local function goToMenu()
+	composer.gotoScene("menu", { time = 800, effect = "crossFade" })
+end
+
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
@@ -73,6 +77,9 @@ function scene:create(event)
 			thisScore.anchorX = 0
 		end
 	end
+	local menuButton = display.newText(sceneGroup, "Menu", display.contentCenterX, 810, native.systemFont, 44)
+	menuButton:setFillColor(0.75,0.78,1)
+	menuButton:addEventListener("tap", goToMenu)
 end
 
 
@@ -103,7 +110,7 @@ function scene:hide( event )
 
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
-
+		composer.removeScene("highscores")
 	end
 end
 
