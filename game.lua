@@ -69,6 +69,7 @@ local mainGroup
 local uiGroup
 local explosionSound
 local fireSound
+local musicTrack
 
 -- Upates the lives and scores
 local function updateText()
@@ -277,6 +278,7 @@ function scene:create( event )
 	-- Ship sounds
 	explosionSound = audio.loadSound("audio/explosion.wav")
 	fireSound = audio.loadSound("audio/fire.wav")
+	musicTrack = audio.loadSound("audio/80s-Space-Game_Looping.wav")
 end
 
 
@@ -295,6 +297,8 @@ function scene:show( event )
 		Runtime:addEventListener("collision", onCollision)
 		-- Variable allows to add pausing to the game
 		gameLoopTimer = timer.performWithDelay(1000, gameLoop, 0)
+		-- Start the background music
+		audio.play(musicTrack, {channel=1,loops=-1})
 	end
 end
 
@@ -312,6 +316,8 @@ function scene:hide( event )
 		-- Code here runs immediately after the scene goes entirely off screen
 		Runtime:removeEventListener("collision", onCollision )
 		physics.pause()
+		-- Remove the background music
+		audio.stop(1)
 		composer.removeScene("game")
 	end
 end
@@ -319,10 +325,12 @@ end
 
 -- destroy()
 function scene:destroy( event )
-
-	local sceneGroup = self.view
 	-- Code here runs prior to the removal of scene's view
-
+	local sceneGroup = self.view
+	-- Dispose of all the audio
+	audio.dispose(explosionSound)
+	audio.dispose(fireSound)
+	audio.dispose(musicTrack)
 end
 
 
