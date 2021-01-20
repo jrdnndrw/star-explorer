@@ -8,6 +8,8 @@ local scene = composer.newScene()
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
 
+local musicTrack
+
 local function goToGame()
 	composer.gotoScene("game", { time = 800, effect = "crossFade" })
 end
@@ -45,6 +47,9 @@ function scene:create(event)
 	-- Button handlers
 	playButton:addEventListener("tap", goToGame)
 	highScoresButton:addEventListener("tap", goToHighScores)
+
+	-- Background music
+	musicTrack = audio.loadSound("audio/Escape_Looping.wav")
 end
 
 
@@ -59,7 +64,8 @@ function scene:show( event )
 
 	elseif ( phase == "did" ) then
 		-- Code here runs when the scene is entirely on screen
-
+		-- Start background music
+		audio.play(musicTrack, {channel=1, loops=-1})
 	end
 end
 
@@ -75,6 +81,8 @@ function scene:hide( event )
 
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
+		-- Remove the background music
+		audio.stop(1)
 
 	end
 end
@@ -85,7 +93,8 @@ function scene:destroy( event )
 
 	local sceneGroup = self.view
 	-- Code here runs prior to the removal of scene's view
-
+	-- Dispose of background music
+	audio.dispose(musicTrack)
 end
 
 

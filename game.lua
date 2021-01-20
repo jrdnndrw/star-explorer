@@ -278,6 +278,7 @@ function scene:create( event )
 	-- Ship sounds
 	explosionSound = audio.loadSound("audio/explosion.wav")
 	fireSound = audio.loadSound("audio/fire.wav")
+	-- Background music
 	musicTrack = audio.loadSound("audio/80s-Space-Game_Looping.wav")
 end
 
