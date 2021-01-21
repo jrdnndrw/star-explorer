@@ -79,7 +79,15 @@ end
 
 -- Create an asteroid
 local function createAsteroid()
-    local newAsteroid = display.newImageRect(mainGroup, objectSheet, 1, 102, 85)
+    local newAsteroid
+    local randomAsteroid = math.random(3)
+    if (randomAsteroid == 1) then
+        newAsteroid = display.newImageRect(mainGroup, objectSheet, 1, 102, 85)
+    elseif (randomAsteroid == 2) then
+        newAsteroid = display.newImageRect(mainGroup, objectSheet, 2, 90, 83)
+    elseif (randomAsteroid == 3) then
+        newAsteroid = display.newImageRect(mainGroup, objectSheet, 3, 100, 97)
+    end
     table.insert(asteroidsTable, newAsteroid)
     physics.addBody(newAsteroid, "dynamic", { radius = 40, bounce = 0.8})
     newAsteroid.myName = "asteroid"
