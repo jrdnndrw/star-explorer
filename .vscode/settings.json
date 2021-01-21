@@ -1,12 +1,1 @@
-{
-    "Lua.diagnostics.globals": [
-        "graphics",
-        "display",
-        "native",
-        "transition",
-        "timer",
-        "Runtime",
-        "system",
-        "audio"
-    ]
-}
+{}

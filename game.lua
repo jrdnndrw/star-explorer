@@ -1,5 +1,12 @@
 
-local composer = require( "composer" )
+local composer = require("composer")
+local graphics = require("graphics")
+local display = require("display")
+local native = require("native")
+local transition = require("transition")
+local timer = require("timer")
+local Runtime = require("Runtime")
+local audio = require("audio")
 
 local scene = composer.newScene()
 

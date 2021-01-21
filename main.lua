@@ -5,6 +5,8 @@
 -----------------------------------------------------------------------------------------
 
 local composer = require("composer")
+local display = require("display")
+local audio = require("audio")
 
 -- Hide the status bar
 display.setStatusBar(display.HiddenStatusBar)

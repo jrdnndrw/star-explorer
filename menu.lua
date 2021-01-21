@@ -1,5 +1,8 @@
 
 local composer = require("composer")
+local display = require("display")
+local native = require("native")
+local audio = require("audio")
 
 local scene = composer.newScene()
 
